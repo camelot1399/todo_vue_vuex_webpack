@@ -4,7 +4,7 @@
     <div v-if="getTasks.length">
       <div class="tasksList">
         <div v-for="item in getTasks" :key="item.id">
-          <Task :task="item" />
+          <Task :task="item"  />
         </div>
       </div>
     </div>

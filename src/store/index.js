@@ -17,6 +17,9 @@ export default new Vuex.Store({
     },
     REMOVETASK (state, payload) {
       state.tasks = payload
+    },
+    SAVETASK (state, payload) {
+      state.tasks = payload
     }
   },
   actions: {
@@ -31,6 +34,20 @@ export default new Vuex.Store({
     removeTaskAction: ({ commit, state }, id) => {
       const filterTasks = state.tasks.filter(task => task.id !== id)
       commit('REMOVETASK', filterTasks)
+    },
+    saveTaskAction: ({ commit, state }, payload) => {
+      console.log('payload', payload)
+      const tasks = state.tasks.map(task => {
+        if (task.id === payload.id) {
+          return payload
+        }
+
+        return task
+      })
+
+      console.log('tasks', tasks)
+
+      commit('SAVETASK', tasks)
     }
   },
   modules: {

@@ -1,8 +1,18 @@
 <template>
   <div class="task">
-    {{ task.title }}
+
+    <div v-if="!isEditMode">{{ task.title }}</div>
+    <div v-else>
+      <input type="text" value="editText" v-model="editText">
+    </div>
+
     <div>
-      <button>Редактировать</button>
+      <div v-if="!isEditMode">
+        <Button @onClick="editMode()">Редактировать</Button>
+      </div>
+      <div v-else>
+        <Button @onClick="saveText(task)">Сохранить</Button>
+      </div>
       <button @click="removeTaskAction(task.id)">Удалить</button>
     </div>
   </div>
@@ -10,7 +20,9 @@
 
 <script>
 import { mapActions } from 'vuex'
+import Button from '../UI/Button.vue'
 export default {
+  components: { Button },
   name: 'Task',
   props: {
     task: {
@@ -18,8 +30,25 @@ export default {
       default: () => {}
     }
   },
+  data () {
+    return {
+      isEditMode: false,
+      editText: ''
+    }
+  },
   methods: {
-    ...mapActions(['removeTaskAction'])
+    ...mapActions(['removeTaskAction', 'saveTaskAction']),
+    editMode () {
+      this.editText = this.task.title
+      this.isEditMode = true
+    },
+    saveText (task) {
+      this.saveTaskAction({
+        id: task.id,
+        title: this.editText
+      })
+      this.isEditMode = false
+    }
   }
 }
 </script>

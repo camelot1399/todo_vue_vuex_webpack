@@ -3,7 +3,9 @@
     <h1>TODO</h1>
 
     <input type="text" v-model="text" />
-    <button @click="addNewTask()">Отправить</button>
+    <Button @onClick="addNewTask()">
+      Отправить
+    </Button>
 
     <Tasks />
   </div>
@@ -12,10 +14,12 @@
 <script>
 import { mapActions } from 'vuex'
 import Tasks from '../components/tasks/Tasks.vue'
+import Button from '../components/UI/Button.vue'
 export default {
   name: 'Home',
   components: {
-    Tasks
+    Tasks,
+    Button
   },
   data () {
     return {

@@ -9,11 +9,12 @@
     <div>
       <div v-if="!isEditMode">
         <Button @onClick="editMode()">Редактировать</Button>
+        <button @click="removeTaskAction(task.id)">Удалить</button>
       </div>
       <div v-else>
         <Button @onClick="saveText(task)">Сохранить</Button>
       </div>
-      <button @click="removeTaskAction(task.id)">Удалить</button>
+
     </div>
   </div>
 </template>

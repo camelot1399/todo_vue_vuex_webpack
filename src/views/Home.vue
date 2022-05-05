@@ -3,7 +3,7 @@
     <h1>TODO</h1>
 
     <input type="text" v-model="text" />
-    <button @click="addTaskAction({ id: new Date(), title: text })">Отправить</button>
+    <button @click="addNewTask()">Отправить</button>
 
     <Tasks />
   </div>
@@ -23,7 +23,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['addTaskAction'])
+    ...mapActions(['addTaskAction']),
+    addNewTask () {
+      this.addTaskAction(this.text)
+      this.text = ''
+    }
   },
   mounted () {
   }

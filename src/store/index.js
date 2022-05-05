@@ -12,13 +12,25 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
-    ADDTASKMUTATIONS (state, payload) {
+    ADDTASK (state, payload) {
       state.tasks.push(payload)
+    },
+    REMOVETASK (state, payload) {
+      state.tasks = payload
     }
   },
   actions: {
     addTaskAction: ({ commit }, payload) => {
-      commit('ADDTASKMUTATIONS', payload)
+      const data = {
+        id: new Date(),
+        title: payload
+      }
+
+      commit('ADDTASK', data)
+    },
+    removeTaskAction: ({ commit, state }, id) => {
+      const filterTasks = state.tasks.filter(task => task.id !== id)
+      commit('REMOVETASK', filterTasks)
     }
   },
   modules: {

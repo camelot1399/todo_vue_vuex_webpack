@@ -3,19 +3,29 @@
     <h1>TODO</h1>
 
     <input type="text" v-model="text" />
-    <button>Отправить</button>
+    <button @click="addTaskAction({ id: new Date(), title: text })">Отправить</button>
+
+    <Tasks />
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import Tasks from '../components/tasks/Tasks.vue'
 export default {
   name: 'Home',
-  components: {},
+  components: {
+    Tasks
+  },
   data () {
     return {
       text: ''
     }
   },
-  mounted () {}
+  methods: {
+    ...mapActions(['addTaskAction'])
+  },
+  mounted () {
+  }
 }
-</script>
+</script>4
